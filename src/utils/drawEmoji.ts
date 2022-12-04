@@ -26,9 +26,11 @@ export const drawEmoji = async ({ detectionsWithExpressions, canvas }: DrawEmoji
 
     image.onload = () => {
       const width = detectionsWithExpression.detection.box.height * 1.2;
-      const height = detectionsWithExpression.detection.box.height * 1.2;
       const x = detectionsWithExpression.detection.box.x - width * 0.1;
+
+      const height = detectionsWithExpression.detection.box.height * 1.2;
       const y = detectionsWithExpression.detection.box.y - height * 0.2;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(image, x, y, width, height);
     };
