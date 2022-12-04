@@ -2,7 +2,7 @@
 
 This project is a prototype that utilizes face-api.js (built on top of TensorFlow.js). This application matches a single persons facial expression with an emote that best suits their portrayed emotion.
 
-## Getting Started (local)
+## Getting Started (Local)
 * `$ git clone git@github.com:p14/face-emotes.git`
 * `$ npm install`
 * `$ npm run start`
