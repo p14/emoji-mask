@@ -11,7 +11,6 @@ const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [webcamClasses, setWebcamClasses] = useState<'video' | 'video frame'>('video');
 
   const loadModels = async () => {
     const modelUrl = '/models';
@@ -77,12 +76,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (isLoaded) {
-      setWebcamClasses('video frame');
-    }
-  }, [isLoaded]);
-
-  useEffect(() => {
     faceDetectHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -98,7 +91,7 @@ const App = () => {
       {!isLoaded && <Loader />}
 
       <main className='main'>
-        <Webcam audio={false} ref={webcamRef} className={webcamClasses} />
+        <Webcam audio={false} ref={webcamRef} className={!isLoaded ? 'video' : 'video frame'} />
         <canvas ref={canvasRef} className='video' />
       </main>
     </div>
