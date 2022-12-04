@@ -1,0 +1,36 @@
+.container {
+  align-items: center;
+  background: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header {
+  text-align: center;
+}
+
+.main {
+  flex: 1;
+  position: relative;
+  width: 100%;
+}
+
+.video {
+  position: absolute;
+  height: auto;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 700px;
+  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+}
+
+.frame {
+  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.25);
+  transition: all 1s ease-in-out;
+}

@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import * as faceapi from 'face-api.js';
-import Head from 'next/head';
-import Loader from './components/Loader';
+import Loader from './components/loader';
 import { drawEmoji } from './utils/drawEmoji';
-import './styles/home.module.css';
+import './styles/app.css';
 
-const Home = () => {
+const App = () => {
 
   const webcamRef = useRef<Webcam>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [webcamClasses, setWebcamClasses] = useState<'video' | 'video frame'>('video');
 
   const loadModels = async () => {
     const modelUrl = '/models';
@@ -22,15 +22,15 @@ const Home = () => {
   };
 
   const handleLoadWaiting = async () => {
-    const timerConditions = (
-      webcamRef.current &&
-      webcamRef.current.video &&
-      webcamRef.current.video.readyState === 4
-    );
-
     return new Promise((resolve) => {
       const timer = setInterval(() => {
-        if (timerConditions) {
+        const conditions = (
+          webcamRef.current &&
+          webcamRef.current.video &&
+          webcamRef.current.video.readyState === 4
+        );
+
+        if (conditions) {
           resolve(true);
           clearInterval(timer);
         }
@@ -77,34 +77,32 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if (isLoaded) {
+      setWebcamClasses('video frame');
+    }
+  }, [isLoaded]);
+
+  useEffect(() => {
     faceDetectHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
-      <div className='container'>
-        <Head>
-          <title>
-            Face Emotes
-          </title>
-          <meta name='description' content='Mask Emoji to your face' />
-          <meta property='og:image' key='ogImage' content='/emojis/happy.png' />
-          <link rel='icon' href='/emojis/happy.png' />
-        </Head>
-        <header className='header'>
-          <h1 className='title'>
-            Face Emotes
-          </h1>
-        </header>
-        <main className='main'>
-          <Webcam audio={false} ref={webcamRef} className='video' />
-          <canvas ref={canvasRef} className='video' />
-        </main>
-      </div>
+    <div className='container'>
+      <header className='header'>
+        <h1>
+          EmojiFace
+        </h1>
+      </header>
+
       {!isLoaded && <Loader />}
-    </>
+
+      <main className='main'>
+        <Webcam audio={false} ref={webcamRef} className={webcamClasses} />
+        <canvas ref={canvasRef} className='video' />
+      </main>
+    </div>
   );
 }
 
-export default Home;
+export default App;

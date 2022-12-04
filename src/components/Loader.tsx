@@ -1,9 +1,9 @@
-import '../styles/loader.module.css'
+import '../styles/loader.css'
 
 const Loader = () => {
   return (
-    <div className='container'>
-      <div className='loader5' />
+    <div className='loader-container'>
+      <div className='loader5'></div>
     </div>
   );
 };
