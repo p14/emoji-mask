@@ -11,6 +11,7 @@ const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [webcamEnabled, setWebcamEnabled] = useState<boolean>(false);
 
   const loadModels = async () => {
     const modelUrl = '/models';
@@ -75,25 +76,43 @@ const App = () => {
     }
   };
 
+  const renderWebcam = () => (
+    <>
+      <Webcam audio={false} ref={webcamRef} className={!isLoaded ? 'video' : 'video frame'} />
+      <canvas ref={canvasRef} className='video' />
+    </>
+  )
+
   useEffect(() => {
-    faceDetectHandler();
+    if (webcamEnabled) {
+      setIsLoaded(false);
+      faceDetectHandler();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [webcamEnabled]);
 
   return (
     <div className='container'>
       <header className='header'>
-        <h1>
-          EmojiMask
-        </h1>
+        <h1>EmojiMask</h1>
+        &nbsp;
+        <label className='switch'>
+          <input type='checkbox' checked={webcamEnabled} onClick={() => setWebcamEnabled((previous) => !previous)} />
+          <span className='slider' />
+        </label>
       </header>
 
-      {!isLoaded && <Loader />}
+      {!isLoaded && webcamEnabled && <Loader />}
 
       <main className='main'>
-        <Webcam audio={false} ref={webcamRef} className={!isLoaded ? 'video' : 'video frame'} />
-        <canvas ref={canvasRef} className='video' />
+        {webcamEnabled && renderWebcam()}
       </main>
+
+      <footer>
+        <p>
+          Created by Joseph Perez - <a href='https://www.github.com/p14/emojimask' target='_blank' rel='noreferrer'>Source Code</a>
+        </p>
+      </footer>
     </div>
   );
 }
