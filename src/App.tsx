@@ -84,7 +84,7 @@ const App = () => {
     <div className='container'>
       <header className='header'>
         <h1>
-          EmojiFace
+          EmojiMask
         </h1>
       </header>
 
