@@ -110,7 +110,7 @@ const App = () => {
 
       <footer>
         <p>
-          Created by Joseph Perez - <a href='https://www.github.com/p14/emojimask' target='_blank' rel='noreferrer'>Source Code</a>
+          Created by Joseph Perez - <a href='https://www.github.com/p14/emoji-mask' target='_blank' rel='noreferrer'>Source Code</a>
         </p>
       </footer>
     </div>
