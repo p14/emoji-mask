@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import * as faceapi from 'face-api.js';
-import Loader from './components/loader';
+import Loader from './components/Loader';
 import { drawEmoji } from './utils/drawEmoji';
 import './styles/app.css';
 
