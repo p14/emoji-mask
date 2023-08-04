@@ -1,6 +1,7 @@
 {
-  "name": "emoji-mask-v2",
+  "name": "emoji-mask",
   "private": true,
+  "author": "Joseph Perez",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
